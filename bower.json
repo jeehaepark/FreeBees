@@ -1,9 +1,9 @@
 {
-  "name": "freebiesnearme",
+  "name": "freebees",
   "description": "",
   "main": "index.js",
   "license": "ISC",
-  "homepage": "https://github.com/tinkleJess/INeedClosure",
+  "homepage": "https://freebees.herokuapp.com/",
   "moduleType": [],
   "ignore": [
     "**/.*",
