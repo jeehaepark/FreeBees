@@ -28,11 +28,11 @@ We have a test inside our specs folder.
 
 ## File Structure
 
-Files are organized in the following directories: Client, Server, and Specs.
+Files are organized in the following directories: Client, Server.
 
 ## Choice of Technologies
 
-For this project, we used AngularJS for our front end and Node.js, Express, and MongoDB for our server and database. We also used ???mocha??? for the test.
+For this project, we used AngularJS for our front end and Node.js, Express, and MongoDB for our server and database.
 
 We used MongoDB for the document storage of the item names and the item locations. We used an ORM called mongoose, which is an npm module, which gives us easier access to our database. Refer to this link to learn more about mongoose [Mongoose Doc](http://mongoosejs.com/). We used MongoLab as a heroku addon when delpoying our app.
 
