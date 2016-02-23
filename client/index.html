@@ -27,6 +27,12 @@
         <form novalidate>
           <input id="searchBox" placeholder="Search for an item" type="text" ng-model="search.input">
           <button class="yellowButton" id="searchBtn" ng-click="filterMap()" type="submit">Search</button>
+          <!-- <select>
+            <option ng-model="search.input"> 2016-02-19</option>
+          </select> -->
+          <input id="searchBox" placeholder="YYYY-MM-DD" type="text" ng-model="search.dataInput">
+          <button ng-click="filterMap()" type="submit">DATE Search</button>
+          <p>{{search.dataInput}}</p>
         </form>
       </div>
      </div>

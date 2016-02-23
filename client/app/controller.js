@@ -31,9 +31,15 @@ var app = angular.module('myApp', ['map.services'])
   //this function filters map based on what user enters into filter field
   $scope.filterMap = function(){
     //convert inputted filter item to lowerCase so that matches with lowerCase values stored in db
-    var lowerCaseFilterItem = convertToLowerCase($scope.search.input);
-    var searchInput = lowerCaseFilterItem;
-    DBActions.filterDB(searchInput);
+    if($scope.search.dataInput === undefined){
+      var lowerCaseFilterItem = convertToLowerCase($scope.search.input);
+      var searchInput = lowerCaseFilterItem;
+      DBActions.filterDB(searchInput);
+    }
+    //if input is date  then
+    else {
+      DBActions.filterDBByDate($scope.search.dataInput)
+    }
     $scope.clearForm();
   };
 
@@ -104,7 +110,7 @@ var app = angular.module('myApp', ['map.services'])
     return $http.get('/api/items')
       .then(function(data){
 
-        //filter our returned db by the desired itemName
+        // filter our returned db by the desired itemName
         var filtered = data.data.filter(function(item){
           return item.itemName.indexOf(toFilterBy) > -1;
         });
@@ -115,6 +121,25 @@ var app = angular.module('myApp', ['map.services'])
         console.log('Error when filterDB invoked - get from "/api/items" failed. Error: ', err);
       });
       $scope.clearForm();
+  };
+
+  var filterDBByDate = function (toFilterByDate){
+    return $http.get('/api/items')
+      .then(function(data){
+
+        console.log('this is data of filterDB',toFilterByDate[0],toFilterByDate[1],toFilterByDate[2],toFilterByDate[3],toFilterByDate[4],toFilterByDate);
+        //if data starts with 2016, then look up the createdAt property
+        var filtered = data.data.filter(function(item){
+        return item.createdAt.indexOf(toFilterByDate) > -1 ;
+        });
+
+        //re-initialize map with only these markers
+        Map.initMap(filtered);
+      }, function(err){
+        console.log('Error when filterDB invoked - get from "/api/items" failed. Error: ', err);
+      });
+      $scope.clearForm();
+
   };
 
   var removeFromDB = function(toRemove){
@@ -132,6 +157,7 @@ var app = angular.module('myApp', ['map.services'])
   return {
     saveToDB: saveToDB,
     filterDB: filterDB,
+    filterDBByDate: filterDBByDate,
     removeFromDB: removeFromDB
   };
 });
