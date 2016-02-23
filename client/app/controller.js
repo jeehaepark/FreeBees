@@ -127,9 +127,9 @@ var app = angular.module('myApp', ['map.services'])
     return $http.get('/api/items')
       .then(function(data){
 
-        console.log('this is data of filterDB',toFilterByDate[0],toFilterByDate[1],toFilterByDate[2],toFilterByDate[3],toFilterByDate[4],toFilterByDate);
-        //if data starts with 2016, then look up the createdAt property
+        // data starts with 2016, then look up the createdAt property
         var filtered = data.data.filter(function(item){
+          var rawDate = item.createdAt;
         return item.createdAt.indexOf(toFilterByDate) > -1 ;
         });
 
